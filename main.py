@@ -19,18 +19,12 @@ class Main:
             print("Division: ", i+1)
 
 main = Main()
-
-
-# democrats = Party("Democrats", "Joe Biden", [], [])
-# republicans = Party("Republicans", "Donald Trump", [], [])
-# libertarian = Party("Libertarian", "Ron Paul", [], [])
-# democrats.PartyDisplay()
-# republicans.PartyDisplay()
-# GLBW = Issue(10)
-# print(GLBW.approach)
-# Issue.IncreaseApproach(GLBW)
-# print(GLBW.approach)
-# GJ = Participants("Gary Johnson")
-# GJ.ParticipantsDisplay()
-# GJ.PopularityIncrease()
-# GJ.ParticipantsDisplay()
+DemocratsT = Teams()
+RepublicansT = Teams()
+LibertarianT = Teams()
+parties = []
+parties.append(Party("Democrats", "Joe Biden", [], DemocratsT))
+parties.append(Party("Republicans", "Donald Trump", [], RepublicansT))
+parties.append(Party("Libertarian", "Ron Paul", [], LibertarianT))
+for parties in parties:
+    parties.PartyDisplay()
