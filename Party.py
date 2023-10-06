@@ -8,7 +8,7 @@ class Party:
         self.team = team
     def PartyDisplay(self):
         print("Party Name: ", self.name)
-        print("Party Leader: ", self.leader)
+        self.leader.LeaderDisplay()
         for candidates in self.candidates:
             candidates.ParticipantsDisplay()
         print(f"Party Team Preparation: {self.team.preparation}, Party Team Preparation:{self.team.creativity}")
