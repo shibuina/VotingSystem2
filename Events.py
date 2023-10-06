@@ -9,7 +9,7 @@ class Events:
         self.subtype = random.randint(1,2)
         self.corresponding_participants = random.randint(1,3)
         self.corresponding_issues = random.randint(1,5)
-    def DebateEvent(self,division):
+    def DebateEvent(self,parties,division):
         score = [0,0,0]
         score[0] = 0.5*division.participants[0].Popularity + 0.6*division.participants[0].CritReasoning + 0.6*division.participants[0].Persuasion + 0.8*division.participants[0].Debating + 0.4*parties[0].team.preparation + 0.3*parties[0].team.creativity
         score[1] = 0.5*division.participants[1].Popularity + 0.6*division.participants[1].CritReasoning + 0.6*division.participants[1].Persuasion + 0.8*division.participants[1].Debating + 0.4*parties[1].team.preparation + 0.3*parties[1].team.creativity
@@ -22,45 +22,46 @@ class Events:
             return 3
         else:
             return 0
-    def CanRelEvent (self,division):
+    def CanRelEvent (self,parties,division):
         if self.subtype == 1:
             return 1
         else:
             return -1
-    def LeadRelEvent (self):
+    def LeadRelEvent (self,parties,division):
         if self.subtype == 1:
             return 1
         else:
             return -1
-    def IssueRelEvent (self,division):
+    def IssueRelEvent (self,parties,division):
         if self.subtype == 1:
             return 1
         else:
             return -1
-    def EventHappening(self,division):
+    def EventHappening(self,parties,division):
         if self.happening >= 51:
             if self.type == 1:
                 print(f"There is a debate today in division {division.division_no}!")
-                if self.DebateEvent(division) == 1:
+                if self.DebateEvent(parties,division) == 1:
                     print("The Democratic Party won the debate!")
                     division.participants[0].PopularityIncrease()
                     division.participants[1].PopularityDecrease()
                     division.participants[2].PopularityDecrease()
-                elif self.DebateEvent(division) == 2:
+                elif self.DebateEvent(parties,division) == 2:
                     print("The Republican Party won the debate!")
                     division.participants[1].PopularityIncrease()
                     division.participants[0].PopularityDecrease()
                     division.participants[2].PopularityDecrease()
-                elif self.DebateEvent(division) == 3:
+                elif self.DebateEvent(parties,division) == 3:
                     print("The Libertarian Party won the debate!")
                     division.participants[2].PopularityIncrease()
                     division.participants[0].PopularityDecrease()
                     division.participants[1].PopularityDecrease()
                 else:
                     print("No one won the debate!")
+                print("--------------------")
             elif self.type == 2:
                 print(f"There is an Event today in division {division.division_no}!")
-                if self.CanRelEvent(division) == -1:
+                if self.CanRelEvent(parties,division) == -1:
                     if self.corresponding_participants == 1:
                         print("The candidate ", division.participants[0].name, " from the Democratic Party was caught in a scandal!")
                         division.participants[0].PopularityDecrease()
@@ -80,9 +81,10 @@ class Events:
                     else:
                         print("The candidate ", division.participants[2].name, " from the Libertarian Party contributed to the community!")
                         division.participants[0].PopularityIncrease()
+                print("--------------------")
             elif self.type == 3:
                 print(f"There is an Event today in division {division.division_no}!")
-                if self.LeadRelEvent(division) == -1:
+                if self.LeadRelEvent(parties,division) == -1:
                     if self.corresponding_participants == 1:
                         print("The leader from the Democratic Party was caught in a scandal!")
                         parties[0].leader.PopularityDecrease()
@@ -102,9 +104,10 @@ class Events:
                     else:
                         print("The leader from the Libertarian Party contributed to the community!")
                         parties[2].leader.PopularityIncrease()
+                print("--------------------")
             else:
                 print("There is an Event today in division ", division.division_no)
-                if self.IssueRelEvent(division) == 1:
+                if self.IssueRelEvent(parties,division) == 1:
                     if self.corresponding_issues == 1:
                         print("The issue Global Warming approach has been changed!")
                         division.issues[0].IncreaseApproach()
@@ -136,4 +139,7 @@ class Events:
                     else:  
                         print("The issue Globalization approach has been changed!")
                         division.issues[4].DecreaseApproach()
-            return False
+                print("--------------------")
+        else:
+            print("There is no event today!")
+            print("--------------------")

@@ -7,6 +7,9 @@ class Participants:
         self.Persuasion = random.randint(50,80)
         self.Debating = random.randint(50,80)
         self.ProblemSovling = random.randint(50,80)
+        self.stance = []
+        for i in range (5):
+            self.stance.append(random.randint(0,9))
     def ParticipantsDisplay(self):
         print("Participant Name: ", self.name)
         print("Participant Popularity: ", self.Popularity)
@@ -14,6 +17,7 @@ class Participants:
         print("Participant Persuasion: ", self.Persuasion)
         print("Participant Debating: ", self.Debating)
         print("Participant Problem Solving: ", self.ProblemSovling)
+        print("Participant Stance: ", *self.stance)
     def PopularityIncrease(self):
         if self.Popularity >= 90:
             self.Popularity = 100

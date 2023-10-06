@@ -62,24 +62,61 @@ class Main:
         issues.append(Issue("Globalization",6))
         return issues
     def ProceedingDays (self,parties,divisions):
-        events = []
-        for i in range(self.days_num):
-            events.append(Events())
         for i in range(self.days_num):
             print("Day: ", i+1)
             for i in range(self.divisions_num):
-                divisions[i].DivisionDisplay()
+                event = Events()
+                event.EventHappening(parties,divisions[i])
+            self.DaysDisplay(parties,divisions)
     def DaysDisplay(self,parties,divisions):
         for i in range(self.days_num):
             print("Day: ", i+1)
+            for i in range (3):
+                parties[i].PartyDisplay()
             for i in range(self.divisions_num):
                 divisions[i].DivisionDisplay()
-
+    def DisplayBeginning(self,parties,divisions):
+        for i in range (3):
+                parties[i].PartyDisplay()
+        for i in range(self.divisions_num):
+            divisions[i].DivisionDisplay()
+    def StancePoints(self,parties,division):
+        points = [0]*3
+        for i in range(3):
+            for k in range(5):
+                points[i] += 0.5*(division.participants[i].stance[k] - division.issues[k].approach)**2
+            points[i] += division.participants[i].Popularity*0.2 + parties[i].leader.popularity*0.3
+        return points
+    def FinalVoting(self,parties,divisions):
+        #report
+        self.DisplayBeginning(parties,divisions)
+        #voting scores
+        people_no = self.divisions_num
+        parliament_people = [0]*3
+        for i in range(self.divisions_num):
+            points = main.StancePoints(parties,divisions[i])
+            print("Division ", i+1)
+            print("Voting Scores: ", points)
+            print("The winner is: ", parties[points.index(max(points))].name)
+            print("--------------------")
+            if points.index(max(points)) == 0:
+                parliament_people[0] += 1
+            elif points.index(max(points)) == 1:
+                parliament_people[1] += 1
+            else:
+                parliament_people[2] += 1
+        for i in range(3):
+            if parliament_people[i] > people_no/2:
+                print("The winner of the elections is: ", parties[i].name)
+                print("the new leader ís: ", parties[i].leader.nam,"!")
+                print("--------------------")   
+                quit()
+        print("A hung parliament should be formed!")
+        print("--------------------")   
 main = Main()
 parties = main.Setup()[0]
-#Display at the beginning
-for party in parties:
-    party.PartyDisplay()
 divisions = main.Setup()[1]
-for division in divisions:
-    division.DivisionDisplay()
+#Display at the beginning
+main.DisplayBeginning(parties,divisions)
+main.ProceedingDays(parties,divisions)
+main.FinalVoting(parties,divisions)

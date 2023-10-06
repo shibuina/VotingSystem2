@@ -14,8 +14,8 @@ class Division:
         print("\nDivision Participants: ", end=" ")
         for i in range(len(self.participants)):
             if i == len(self.participants)-1:
-                print(self.participants[i].name, end=" ")
+                print(self.participants[i].name, *self.participants[i].stance, end=" ")
             else:
-                print(self.participants[i].name, end=", ")
+                print(self.participants[i].name, *self.participants[i].stance, end=", ")
         print("\n --------------------")
 # Division 1

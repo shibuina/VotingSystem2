@@ -11,12 +11,12 @@ class Leader:
         print("Leader Persuasion: ", self.persuasion)
         print("Leader Leadership: ", self.leadership)
     def PopularityIncrease(self):
-        if self.Popularity >= 90:
-            self.Popularity = 100
+        if self.popularity >= 90:
+            self.popularity = 100
         else:
-            self.Popularity += random.randint(1,10)
+            self.popularity += random.randint(1,10)
     def PopularityDecrease(self):
-        if self.Popularity <= 10:
-            self.Popularity = 0
+        if self.popularity <= 10:
+            self.popularity = 0
         else:
-            self.Popularity -= random.randint(1,10)
+            self.popularity -= random.randint(1,10)

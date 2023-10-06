@@ -11,6 +11,6 @@ class Party:
         self.leader.LeaderDisplay()
         for candidates in self.candidates:
             candidates.ParticipantsDisplay()
-        print(f"Party Team Preparation: {self.team.preparation}, Party Team Preparation:{self.team.creativity}")
+        print(f"Party Team Preparation: {self.team.preparation}, Party Team Preparation: {self.team.creativity}")
         print("--------------------")
 
