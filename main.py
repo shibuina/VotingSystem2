@@ -61,14 +61,23 @@ class Main:
         issues.append(Issue("Economics",7))
         issues.append(Issue("Globalization",6))
         return issues
-    def ProceedingDays (self,days_num):
-        for i in range(days_num):
+    def ProceedingDays (self,parties,divisions):
+        events = []
+        for i in range(self.days_num):
+            events.append(Events())
+        for i in range(self.days_num):
             print("Day: ", i+1)
-        for i in range(self.divisions_num):
-            print("Division: ", i+1)
+            for i in range(self.divisions_num):
+                divisions[i].DivisionDisplay()
+    def DaysDisplay(self,parties,divisions):
+        for i in range(self.days_num):
+            print("Day: ", i+1)
+            for i in range(self.divisions_num):
+                divisions[i].DivisionDisplay()
 
 main = Main()
 parties = main.Setup()[0]
+#Display at the beginning
 for party in parties:
     party.PartyDisplay()
 divisions = main.Setup()[1]
