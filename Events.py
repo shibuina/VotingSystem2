@@ -104,6 +104,36 @@ class Events:
                         parties[2].leader.PopularityIncrease()
             else:
                 print("There is an Event today in division ", division.division_no)
-                if self.IssueRelEvent(division)
-        else:
+                if self.IssueRelEvent(division) == 1:
+                    if self.corresponding_issues == 1:
+                        print("The issue Global Warming approach has been changed!")
+                        division.issues[0].IncreaseApproach()
+                    elif self.corresponding_issues == 2:
+                        print("The issue Education approach has been changed!")
+                        division.issues[1].IncreaseApproach()
+                    elif self.corresponding_issues == 3:
+                        print("The issue Army approach has been changed!")
+                        division.issues[2].IncreaseApproach()
+                    elif self.corresponding_issues == 4:
+                        print("The issue Economics approach has been changed!")
+                        division.issues[3].IncreaseApproach()
+                    else:  
+                        print("The issue Globalization approach has been changed!")
+                        division.issues[4].IncreaseApproach()
+                else:
+                    if self.corresponding_issues == 1:
+                        print("The issue Global Warming approach has been changed!")
+                        division.issues[0].DecreaseApproach()
+                    elif self.corresponding_issues == 2:
+                        print("The issue Education approach has been changed!")
+                        division.issues[1].DecreaseApproach()
+                    elif self.corresponding_issues == 3:
+                        print("The issue Army approach has been changed!")
+                        division.issues[2].DecreaseApproach()
+                    elif self.corresponding_issues == 4:
+                        print("The issue Economics approach has been changed!")
+                        division.issues[3].DecreaseApproach()
+                    else:  
+                        print("The issue Globalization approach has been changed!")
+                        division.issues[4].DecreaseApproach()
             return False
